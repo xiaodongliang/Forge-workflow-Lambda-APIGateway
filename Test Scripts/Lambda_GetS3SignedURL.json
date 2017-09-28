@@ -1,0 +1,10 @@
+﻿{
+    "body": {},
+    "headers": {},
+    "method": "GET",
+    "params": {},
+    "query": {
+      "uploadS3":"true",
+      "objectKey": "RevitNative.rvt"
+     }
+  }

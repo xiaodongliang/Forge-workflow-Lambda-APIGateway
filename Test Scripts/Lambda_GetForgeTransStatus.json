@@ -1,0 +1,10 @@
+﻿{
+    "body": {},
+    "headers": {},
+    "method": "GET",
+    "params": {},
+    "query": {
+      "checkForgeStatus":"true",
+      "urn": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6OnhpYW9kb25nX2xhbWJkYV9mb3JnZV90ZXN0L1Jldml0TmF0aXZlLnJ2dA=="
+     }
+  }
