@@ -1,6 +1,13 @@
+[![oAuth2](https://img.shields.io/badge/oAuth2-v1-green.svg)](http://developer.autodesk.com/)
+[![Data-Management](https://img.shields.io/badge/Data%20Management-v1-green.svg)](http://developer.autodesk.com/)
+[![OSS](https://img.shields.io/badge/OSS-v2-green.svg)](http://developer.autodesk.com/)
+[![Model-Derivative](https://img.shields.io/badge/Model%20Derivative-v2-green.svg)](http://developer.autodesk.com/)
+
 # Forge-workflow-Lambda-APIGateway
 
 To supplement the whole workflow of 2legged, I practiced with related technologies. upload local file to Forge, request model translating, and check translating status. The [blog](https://forge.autodesk.com/blog/2legged-workflow-model-translating-aws-lambda-and-api-gateway-part-i) tell more.
+
+![](.\help\workflow.png)
 
 ## Pre-requisites
 1. [Nodejs](https://nodejs.org/en/download/)
@@ -19,12 +26,14 @@ To supplement the whole workflow of 2legged, I practiced with related technologi
     * increase the timeout to 1 minute 30 seconds
      ![](.\help\timeout.png)
     * set a Swagger with S3 behavior (ObjectCreated), binding to the S3 bucket of #2
+    ![](.\help\ç.png)
 5. In [Lambda Index.js](.\Lambda\index.js#L318), set the expire time of signed URL per your requirement. 
 6. open [Lambda](.\Lambda) folder, npm install the modules. Make an zip with [Lambda Index.js](.\Lambda\index.js) and node_mlodules.
 7. upload the zip to the Lambda funtion that has been created in #4. 
         ![](.\help\LambdaZip.png)
 8. Save the Lambda function. 
 9. switch to [AWS API Gateway](https://aws.amazon.com/api-gateway/). Select the two methods gets3uploadurl getforgetransstatus, in [Integration Request], link the method with the Lambda function and the Lambda region.
+      ![](.\help\bindLambda.png)
 
 ## Test in AWS UI
 1. Test Lambda function
