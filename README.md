@@ -31,17 +31,8 @@ To supplement the whole workflow of 2legged, I practiced with related technologi
     * in the function, click [Actions]-->[Configure Test Events]. Select [Hello World]. replace with [Lambda_GetS3SignedURL](.\Test Scripts\Lambda_GetS3SignedURL.json). Click [Test] to check if the log tells the a valid signed URL string.
     * in the function, click [Actions]-->[Configure Test Events]. Select [Hello World]. replace with [Lambda_GetForgeTransStatus.json](.\Test Scripts\Lambda_GetForgeTransStatus.json). Input a valid URN (Created by other samples of Forge). Click [Test] to check if the log tells a valid response of [getting manifest of Model Deravitive API](https://developer.autodesk.com/en/docs/model-derivative/v2/reference/http/urn-manifest-GET/). 
     * in the linked S3 bucket, upload a model file in advance. e.g. in this demo, the file is RevitNative.rvt.  In the Lambda function, click [Actions]-->[Configure Test Events]. Select [S3 Put]. Replace with your S3 bucket name and file name:
-    
-          
-        {
-         "arn": "arn:aws:s3:::xiaodong-test-bucket",
-          "name": "RevitNative.rvt",
-          "ownerIdentity": {
-           "principalId": "EXAMPLE"
-         }
-        }
-
-     Click [Test] to check if the log tells the workflow of uploading to Forge and requesting translating succeeded. 
+     ![](.\help\S3Put.png)
+   Click [Test] to check if the log tells the workflow of uploading to Forge and requesting translating succeeded. 
      
 ## Test in Postman
 1. Deploy API Gateway for test in production. Export to Postman script. Import the collection to Postman.
