@@ -32,13 +32,15 @@ To supplement the whole workflow of 2legged, I practiced with related technologi
     * in the function, click [Actions]-->[Configure Test Events]. Select [Hello World]. replace with [Lambda_GetForgeTransStatus.json](.\Test Scripts\Lambda_GetForgeTransStatus.json). Input a valid URN (Created by other samples of Forge). Click [Test] to check if the log tells a valid response of [getting manifest of Model Deravitive API](https://developer.autodesk.com/en/docs/model-derivative/v2/reference/http/urn-manifest-GET/). 
     * in the linked S3 bucket, upload a model file in advance. e.g. in this demo, the file is RevitNative.rvt.  In the Lambda function, click [Actions]-->[Configure Test Events]. Select [S3 Put]. Replace with your S3 bucket name and file name:
     
-     "bucket": {
-          "arn": "arn:aws:s3:::xiaodong-test-bucket",
+          
+        {
+         "arn": "arn:aws:s3:::xiaodong-test-bucket",
           "name": "RevitNative.rvt",
           "ownerIdentity": {
-            "principalId": "EXAMPLE"
-          }
-          
+           "principalId": "EXAMPLE"
+         }
+        }
+
      Click [Test] to check if the log tells the workflow of uploading to Forge and requesting translating succeeded. 
      
 ## Test in Postman
