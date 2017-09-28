@@ -7,7 +7,7 @@
 
 To supplement the whole workflow of 2legged, I practiced with related technologies. upload local file to Forge, request model translating, and check translating status. The [blog](https://forge.autodesk.com/blog/2legged-workflow-model-translating-aws-lambda-and-api-gateway-part-i) tell more.
 
-![](.\help\workflow.png)
+[![](.\help\workflow.png)]
 
 ## Pre-requisites
 1. [Nodejs](https://nodejs.org/en/download/)
