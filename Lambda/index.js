@@ -136,7 +136,8 @@ var uploadFile = function(bucketKey, filePath, fileName){
 				reject(err);
 			}
 			else{
-				objectsApi.uploadObject(bucketKey, fileName, data.length, data, {}, oAuth2TwoLegged, oAuth2TwoLegged.getCredentials()).then(
+				objectsApi.uploadObject(bucketKey, fileName, data.length, data, {}, 
+							oAuth2TwoLegged, oAuth2TwoLegged.getCredentials()).then(
 					function(res){
 						console.log('Uploading file to Forge>>objectsApi.uploadObject done');
                         
@@ -215,13 +216,13 @@ function callForgeProcess(s3FilePath,s3FileName,callback)
  						
 						console.log("**** Upload file response:", uploadRes.body); 
 						//delete the local file in Lambda space
-                        fs.unlink(s3FilePath); 
+                        			fs.unlink(s3FilePath); 
                          
 						var objectId = uploadRes.body.objectId;  
 						
 						translateFile(objectId).then(function(transRes){
-                            console.log("**** Translate file response:", transRes.body);
-                            callback(null,transRes.body) ; 
+                            				console.log("**** Translate file response:", transRes.body);
+                            				callback(null,transRes.body) ; 
 							
 						}, defaultHandleError);
 		
@@ -239,11 +240,11 @@ function checkForgeTransStatus(urn,callback)
 	  oAuth2TwoLegged.authenticate().then(function(credentials){
 		  //get translating status of Forge
 		 derivativesApi.getManifest(urn,{},
-									oAuth2TwoLegged, oAuth2TwoLegged.getCredentials())
-									.then(function(transStRes){
-										//callback for Lambda 
-										callback(null, transStRes);
-									});
+		      oAuth2TwoLegged, oAuth2TwoLegged.getCredentials())
+			   .then(function(transStRes){
+			//callback for Lambda 
+			callback(null, transStRes);
+		});
 		
 	  }, defaultHandleError); 
 
@@ -315,6 +316,7 @@ exports.handler = function (event, context,callback) {
 		   var url = s3.getSignedUrl('putObject', {
 			   Bucket: s3Bucket,
 			   Key: objectKey,
+			   //set the expire time of signed URL per your requirement
 			   Expires: 60*10, // increase the valid time if it is a large file
 			 });
 	   
