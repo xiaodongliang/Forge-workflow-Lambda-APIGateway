@@ -42,7 +42,8 @@ To supplement the whole workflow of 2legged, I practiced with related technologi
     * in the linked S3 bucket, upload a model file in advance. e.g. in this demo, the file is RevitNative.rvt.  In the Lambda function, click [Actions]-->[Configure Test Events]. Select [S3 Put]. Replace with your S3 bucket name and file name:
      ![](help/S3Put.png)
    Click [Test] to check if the log tells the workflow of uploading to Forge and requesting translating succeeded. 
-     
+2. Test API Gateway
+
 ## Test in Postman
 1. Deploy API Gateway for test in production. Export to Postman script. Import the collection to Postman.
 2. If IAM is set, you will need to input the parameters of AWS Signature. In my current test, I skipped IAM, just for a simple demo.
