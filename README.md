@@ -12,12 +12,44 @@ To supplement the whole workflow of 2legged, I practiced with related technologi
 2. login AWS, create a [S3 bucket](https://aws.amazon.com/s3/) in a region. e.g. in the demo, xiaodong-test-bucket in region us-east-1
 3. login AWS, select [AWS API Gateway](https://aws.amazon.com/api-gateway/). Create API by [Import from Swagger]
     ![](.\help\createAPIGateway.png)
-4. login AWS, select [Lambda](https://aws.amazon.com/lambda/). Create a function, do not specify trigger at the beginning. 
+4. login AWS, select [AWS Lambda](https://aws.amazon.com/lambda/). Create a function, do not specify trigger at the beginning. 
     * Select [node.js 6.10]
-    * add neccessary enviormments variables, filling the S3 bucket name, credentials of Forge, and Forge bucket name,
-     ![](.\help\createAPIGateway.png)
+    * add neccessary enviormments variables, fill in the S3 bucket name, credentials of Forge, and Forge bucket name,
+     ![](.\help\lambdaEV.png)
     * increase the timeout to 1 minute 30 seconds
-     ![](.\help\createAPIGateway.png)
+     ![](.\help\timeout.png)
     * set a Swagger with S3 behavior (ObjectCreated), binding to the S3 bucket of #2
 5. In [Lambda Index.js](.\Lambda\index.js#L318), set the expire time of signed URL per your requirement. 
-6. open [Lambda](.\Lambda) folder, npm install the modules. Make an zip with all files in the folder. 
+6. open [Lambda](.\Lambda) folder, npm install the modules. Make an zip with [Lambda Index.js](.\Lambda\index.js) and node_mlodules.
+7. upload the zip to the Lambda funtion that has been created in #4. 
+        ![](.\help\LambdaZip.png)
+8. Save the Lambda function. 
+9. switch to [AWS API Gateway](https://aws.amazon.com/api-gateway/). Select the two methods gets3uploadurl getforgetransstatus, in [Integration Request], link the method with the Lambda function and the Lambda region.
+
+## Test in AWS UI
+1. Test Lambda function
+    * in the function, click [Actions]-->[Configure Test Events]. Select [Hello World]. replace with [Lambda_GetS3SignedURL](.\Test Scripts\Lambda_GetS3SignedURL.json). Click [Test] to check if the log tells the a valid signed URL string.
+    * in the function, click [Actions]-->[Configure Test Events]. Select [Hello World]. replace with [Lambda_GetForgeTransStatus.json](.\Test Scripts\Lambda_GetForgeTransStatus.json). Input a valid URN (Created by other samples of Forge). Click [Test] to check if the log tells a valid response of [getting manifest of Model Deravitive API](https://developer.autodesk.com/en/docs/model-derivative/v2/reference/http/urn-manifest-GET/). 
+    * in the linked S3 bucket, upload a model file in advance. e.g. in this demo, the file is RevitNative.rvt.  In the Lambda function, click [Actions]-->[Configure Test Events]. Select [S3 Put]. Replace with your S3 bucket name and file name:
+     "bucket": {
+          "arn": "arn:aws:s3:::xiaodong-test-bucket",
+          "name": "RevitNative.rvt",
+          "ownerIdentity": {
+            "principalId": "EXAMPLE"
+          }
+     Click [Test] to check if the log tells the workflow of uploading to Forge and requesting translating succeeded. 
+     
+## Test in Postman
+1. Deploy API Gateway for test in production. Export to Postman script. Import the collection to Postman.
+2. If IAM is set, you will need to input the parameters of AWS Signature. In my current test, I skipped IAM, just for a simple demo.
+    ![](.\help\exportPostman.png)
+3. get S3 signed URL. 
+   ![](.\help\S3URL.png)
+4.  click the URL, select 'PUT' method, input the objectKey (the file name), select the local file, and Send. verify if the file has been uploaded to S3 bucket.
+  ![](.\help\uploadS3.png)
+5. call the endpoint of checking translating status, input the based 64 encoded URN:
+   ![](.\help\checkStatus.png)
+
+
+
+
