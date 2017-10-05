@@ -17,7 +17,7 @@ To supplement the whole workflow of 2legged, I practiced with related technologi
 ## Setup
 1. Verify that you have all the pre-requisites.
 2. login AWS, create a [S3 bucket](https://aws.amazon.com/s3/) in a region. e.g. in the demo, xiaodong-test-bucket in region us-east-1
-3. login AWS, select [AWS API Gateway](https://aws.amazon.com/api-gateway/). Create API by [Import from Swagger]
+3. login AWS, select [AWS API Gateway](https://aws.amazon.com/api-gateway/). Create API by [Import from Swagger], select the Swagger script from [API Gateway Swagger Script](API Gateway/Xiaodong-Forge-Test-swagger-integrations,authorizers,documentation,validators,gatewayresponses.json)
     ![](help/createAPIGateway.png)
 4. login AWS, select [AWS Lambda](https://aws.amazon.com/lambda/). Create a function, do not specify trigger at the beginning. 
     * Select [node.js 6.10]
